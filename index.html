@@ -77,9 +77,9 @@ button,input,select{font:inherit;color:inherit}
 .top.scrolled{border-bottom-color:var(--pearl-3)}
 .top .wrap{height:var(--head);display:flex;align-items:center;gap:28px}
 .top .brand{color:var(--lacquer);width:clamp(150px,15vw,208px);flex:none}
-.top nav{display:flex;gap:26px;margin-left:auto;font-size:15px}
-.top nav a{text-decoration:none;color:var(--ink-2);padding:6px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
-.top nav a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.top .wrap>nav{display:flex;gap:26px;margin-left:auto;font-size:15px}
+.top .wrap>nav a{text-decoration:none;color:var(--ink-2);padding:6px 0;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+.top .wrap>nav a:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .status{display:flex;align-items:center;gap:9px;font-size:14px;color:var(--ink-2);white-space:nowrap}
 .status i{width:8px;height:8px;border-radius:50%;background:var(--steel);flex:none}
 .status.open i{background:var(--jac-ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--jac) 30%,transparent)}
@@ -333,7 +333,7 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 
 /* ───────── responsive ───────── */
 @media (max-width:1100px){
-  .top nav{display:none}
+  .top .wrap>nav{display:none}
   .top .status{margin-left:auto}
   .mbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:var(--lacquer);box-shadow:0 -12px 30px -12px rgba(36,18,42,.5);transform:translateY(110%);transition:transform .4s var(--ease)}
   .mbar.show{transform:none}
@@ -391,6 +391,55 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
   .plate{aspect-ratio:3/2}
   .hero-cta{margin-top:20px}
 }
+/* ───────── mobile layer ───────── */
+.menu-btn{display:none;place-items:center;width:44px;height:44px;flex:none;border:1px solid var(--steel);border-radius:999px;background:none;color:var(--ink);cursor:pointer}
+.menu-btn svg{width:20px;height:20px}
+.mnav{border-top:1px solid var(--pearl-3);background:var(--pearl);max-height:calc(100svh - var(--head));overflow:auto;overscroll-behavior:contain}
+.mnav[hidden]{display:none}
+.mnav-in{max-width:var(--max);margin:0 auto;padding:4px var(--gut) 24px}
+.mnav .ml{display:flex;justify-content:space-between;align-items:center;min-height:58px;border-bottom:1px solid var(--pearl-3);font-size:21px;font-weight:300;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.mnav .ml svg{width:18px;height:18px;color:var(--ink-3)}
+.mnav-foot{display:grid;gap:12px;margin-top:20px}
+.top .mnav .status{display:flex;margin:0;font-size:15px}
+.top .mnav .btn{margin-left:0;width:100%;min-height:50px;font-size:16px}
+.gnav{display:none}
+.visit-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.card{scroll-margin-top:calc(var(--head) + 12px)}
+@media (max-width:1100px){
+  .menu-btn{display:grid}
+  .top.menu-open{background:var(--pearl);border-bottom-color:var(--pearl-3)}
+}
+@media (max-width:900px){
+  .gnav{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;position:sticky;top:var(--head);z-index:6;background:var(--pearl);margin:0 calc(var(--gut) * -1) 6px;padding:12px var(--gut);border-bottom:1px solid var(--pearl-3)}
+  .gnav::-webkit-scrollbar{display:none}
+  .gnav button{flex:none;display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:0 16px;border:1px solid var(--steel);border-radius:999px;background:var(--pearl);font-size:15px;font-weight:500;color:var(--ink);cursor:pointer;white-space:nowrap}
+  .gnav button small{font-size:12.5px;color:var(--ink-3);font-weight:400}
+  .gnav button[aria-selected="true"]{background:var(--jac-ink);border-color:var(--jac-ink);color:#fff}
+  .gnav button[aria-selected="true"] small{color:#fff;opacity:.8}
+  #menu .group:not(.on){display:none}
+  #menu .group{margin-bottom:24px}
+  .booking .wrap{display:flex;flex-direction:column;gap:0}
+  .book-intro{display:contents}
+  .booking h2{order:1}.booking .sub{order:2}
+  .card{order:3;margin-top:28px}
+  .rules{order:4;margin-top:36px}
+}
+@media (max-width:700px){
+  .top .brand{width:164px}
+  .tab span{font-size:13px}
+  .readout .price{grid-column:1 / -1;margin-top:14px}
+  .readout .range{flex-basis:100%}
+  .row{grid-template-columns:30px minmax(0,1fr) auto;gap:4px 12px;padding:18px 0}
+  .row .nm{grid-row:span 2}
+  .row .pr{grid-column:3;grid-row:1}
+  .row .pick{grid-column:3;grid-row:2;justify-self:end;align-self:start;display:inline-flex;align-items:center;min-height:40px;padding:0 16px;margin-top:6px;border:1px solid var(--steel-dark);border-radius:999px;text-decoration:none}
+  .row-ph{grid-row:3}
+  .see{min-height:40px;padding:0 14px 0 11px}
+  .owner figure img{aspect-ratio:4/3}
+  .chairs .tag-ph{justify-self:start}
+  .foot nav a{display:inline-block;padding:10px 0}
+  .visit-cta .btn{flex:1 1 140px}
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
@@ -406,6 +455,9 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
   <symbol id="i-out" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7m-8 0h8v8"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2.8 2.75 5.9 6.45.75-4.78 4.4 1.3 6.37L12 17.02 6.28 20.22l1.3-6.37L2.8 9.45l6.45-.75Z"/></symbol>
   <symbol id="i-photo" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="9" cy="10" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="m4 17 5-4.5 3.5 3 3-2.5 4.5 4"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M4 8.5h16M4 15.5h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="m6 6 12 12M18 6 6 18"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="M14 21v-7.5h2.6l.4-3H14V8.7c0-.9.3-1.5 1.6-1.5H17V4.6c-.3 0-1.2-.1-2.3-.1-2.3 0-3.7 1.4-3.7 3.9v2.1H8.5v3H11V21"/></symbol>
@@ -421,7 +473,22 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
     </nav>
     <p class="status" id="status" aria-live="polite"><i aria-hidden="true"></i><span id="status-text">Open 7 days from 9:30 am</span></p>
     <a class="btn btn-solid" href="#book">Book</a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Open menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></button>
   </div>
+  <nav class="mnav" id="mnav" aria-label="Sections" hidden>
+    <div class="mnav-in">
+      <a class="ml" href="#prices">Price book<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="ml" href="#book">Book a style<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="ml" href="#owner">The owner<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="ml" href="#reviews">Reviews<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="ml" href="#visit">Hours &amp; location<svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <div class="mnav-foot">
+        <p class="status" id="m-status"><i aria-hidden="true"></i><span></span></p>
+        <a class="btn btn-solid" href="tel:0451212233"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call 0451 212 233</a>
+        <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Ido+Hair+Brisbane+187+George+St+Brisbane+City+QLD+4000" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Directions</a>
+      </div>
+    </div>
+  </nav>
 </header>
 
 <main id="main">
@@ -480,6 +547,7 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
       </div>
     </div>
     <div>
+      <div class="gnav" id="gnav" role="tablist" aria-label="Service categories"></div>
       <div id="menu"></div>
       <div class="fine">
         <p>All prices are subject to change upon consultation.</p>
@@ -493,7 +561,7 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 <!-- BOOKING -->
 <section class="sec booking dark" id="book" aria-labelledby="book-h">
   <div class="wrap">
-    <div>
+    <div class="book-intro">
       <h2 id="book-h">Fill in your style card. <b>We’ll keep the chair.</b></h2>
       <p class="sub">Choose a style, your length and a time of day. Your card shows the real price and the right way to book, then hands you to Ido Hair’s booking page to lock in the exact time.</p>
       <ul class="rules">
@@ -598,7 +666,7 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 </section>
 
 <!-- REVIEWS (placeholder) -->
-<section class="sec reviews dark" aria-labelledby="rev-h">
+<section class="sec reviews dark" id="reviews" aria-labelledby="rev-h">
   <div class="wrap">
     <div class="rev-head">
       <h2 id="rev-h">What clients <b>say.</b></h2>
@@ -638,6 +706,7 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
     <div>
       <h2 id="visit-h">Level 2, <b>187 George Street.</b></h2>
       <p class="sub">Brisbane City, upstairs in the CBD. Walk-ins welcome; bookings recommended for chemical work.</p>
+      <div class="visit-cta"><a class="btn btn-solid" href="https://www.google.com/maps/search/?api=1&amp;query=Ido+Hair+Brisbane+187+George+St+Brisbane+City+QLD+4000" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Directions</a><a class="btn btn-line" href="tel:0451212233"><svg aria-hidden="true"><use href="#i-phone"/></svg>Call</a></div>
       <dl class="hours num" id="hours" aria-label="Opening hours">
         <div data-d="1"><dt>Monday</dt><dd>9:30 am to 6:30 pm</dd></div>
         <div data-d="2"><dt>Tuesday</dt><dd>9:30 am to 6:30 pm</dd></div>
@@ -850,9 +919,19 @@ menu.addEventListener("click",e=>{const b=e.target.closest(".see");if(!b)return;
   if(wide.matches){setPreview(no);return;}
   const row=b.closest(".row"),ph=row.querySelector(".row-ph"),open=ph.hidden;
   ph.hidden=!open;b.setAttribute("aria-expanded",String(open));b.lastChild.textContent=open?"Hide the style photo":"See the style photo";open?openPh.add(no):openPh.delete(no);});
+let activeG=0;const gnav=$("#gnav");
+gnav.innerHTML=MENU.map((g,i)=>`<button type="button" role="tab" aria-selected="${i===0}" aria-controls="grp-${i}" data-gi="${i}">${g.g}<small>${g.items.length}</small></button>`).join("");
+function setGroup(i,scroll){
+  activeG=i;[...gnav.children].forEach((b,k)=>b.setAttribute("aria-selected",String(k===i)));
+  menu.querySelectorAll(".group").forEach((g,k)=>g.classList.toggle("on",k===i));
+  gnav.children[i].scrollIntoView({block:"nearest",inline:"center",behavior:reduce?"auto":"smooth"});
+  if(scroll){const y=gnav.getBoundingClientRect().top;if(y<parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--head"))+2)window.scrollTo({top:scrollY+menu.getBoundingClientRect().top-gnav.offsetHeight-parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--head"))-8,behavior:reduce?"auto":"smooth"});}
+}
+gnav.addEventListener("click",e=>{const b=e.target.closest("button");if(b)setGroup(+b.dataset.gi,true);});
+gnav.addEventListener("keydown",e=>{let j=null;if(e.key==="ArrowRight")j=(activeG+1)%MENU.length;if(e.key==="ArrowLeft")j=(activeG-1+MENU.length)%MENU.length;if(j!==null){e.preventDefault();setGroup(j,false);gnav.children[j].focus();}});
 function renderMenu(){
-  menu.innerHTML=MENU.map(g=>`
-  <div class="group"><div class="group-h"><h3>${g.g}</h3><span class="ko" lang="ko">${g.ko}</span></div>
+  menu.innerHTML=MENU.map((g,gi)=>`
+  <div class="group${gi===activeG?" on":""}" id="grp-${gi}" role="tabpanel"><div class="group-h"><h3>${g.g}</h3><span class="ko" lang="ko">${g.ko}</span></div>
   ${g.items.map(it=>{const pr=priceFor(it,tier);
     const price=pr.ask?`<span class="ask">At booking</span>`:`${pr.from?"<small>from</small>":""}${money(pr.v)}`;
     const pl=PLATES.find(x=>x.no===it.no);const open=openPh.has(it.no);
@@ -862,7 +941,7 @@ function renderMenu(){
     <span class="pr num">${price}</span><button class="pick" type="button" data-no="${it.no}" aria-label="Book No.${it.no} ${it.n}">Book</button>${pl?`<img class="row-ph" ${open?"":"hidden"} src="${U(pl.img,800)}" alt="${pl.alt}" loading="lazy" style="object-position:${pl.pos}">`:""}</div>`}).join("")}
   </div>`).join("");
 }
-menu.addEventListener("click",e=>{const b=e.target.closest(".pick");if(!b)return;setStyle(b.dataset.no);$("#book").scrollIntoView({behavior:reduce?"auto":"smooth"});setTimeout(()=>$("#f-style").focus({preventScroll:true}),reduce?0:600);});
+menu.addEventListener("click",e=>{const b=e.target.closest(".pick");if(!b)return;setStyle(b.dataset.no);(wide.matches?$("#book"):$("#card")).scrollIntoView({behavior:reduce?"auto":"smooth"});setTimeout(()=>$("#f-style").focus({preventScroll:true}),reduce?0:600);});
 
 /* ───── style card ───── */
 const fs=$("#f-style");
@@ -914,8 +993,16 @@ $("#yr").textContent=new Date().getFullYear();
 
 /* header rule + mobile bar */
 const top=$("#top"),bar=$("#mbar");
-const io=new IntersectionObserver(([e])=>{bar.classList.toggle("show",!e.isIntersecting);},{threshold:0});
-io.observe($("#hero-book"));
+const seen=new Map();
+const io=new IntersectionObserver(es=>{es.forEach(e=>seen.set(e.target,e.isIntersecting));bar.classList.toggle("show",![...seen.values()].some(Boolean));},{threshold:0});
+io.observe($("#hero-book"));io.observe($("#card"));
+const mb=$("#menu-btn"),mn=$("#mnav");
+function setMenu(open){mn.hidden=!open;mb.setAttribute("aria-expanded",String(open));mb.setAttribute("aria-label",open?"Close menu":"Open menu");mb.querySelector("use").setAttribute("href",open?"#i-x":"#i-menu");top.classList.toggle("menu-open",open);
+  if(open){const s=$("#status"),m=$("#m-status");m.classList.toggle("open",s.classList.contains("open"));m.querySelector("span").textContent=$("#status-text").textContent;}}
+mb.addEventListener("click",()=>setMenu(mn.hidden));
+mn.addEventListener("click",e=>{if(e.target.closest("a"))setMenu(false);});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&!mn.hidden){setMenu(false);mb.focus();}});
+matchMedia("(min-width:1101px)").addEventListener("change",e=>{if(e.matches)setMenu(false);});
 const sent=document.createElement("div");sent.style.cssText="position:absolute;top:0;left:0;height:8px;width:1px;pointer-events:none";document.body.prepend(sent);
 new IntersectionObserver(([e])=>top.classList.toggle("scrolled",!e.isIntersecting)).observe(sent);
 })();
