@@ -134,7 +134,8 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 
 /* ───────── price book ───────── */
 .prices .wrap{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(32px,5vw,80px)}
-.prices-side{position:sticky;top:calc(var(--head) + 28px);align-self:start}
+.prices-side{align-self:stretch}
+.side-sticky{position:sticky;top:calc(var(--head) + 24px)}
 .len{margin:30px 0 0;border:0;padding:0;min-width:0}
 .len legend{font-weight:500;font-size:15px;padding:0;margin-bottom:14px}
 .seg{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:0;padding:0;margin:0;background:var(--steel-line) top/100% 1px no-repeat}
@@ -146,11 +147,14 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 .seg label:nth-child(4) span{--t:31px}.seg label:nth-child(5) span{--t:38px}.seg label:nth-child(6) span{--t:45px}
 .seg input:hover+span{color:var(--ink)}
 .seg input:hover+span::before{background:var(--ink)}
-.seg input:checked+span{color:var(--ink);font-weight:600}
+.seg em{font-style:normal;padding:4px 10px;border-radius:999px;transition:background .25s var(--ease),color .25s var(--ease)}
+.seg input:checked+span{color:#fff;font-weight:600}
+.seg input:checked+span em{background:var(--jac-ink)}
+.seg input:checked+span::after{content:"";position:absolute;left:50%;top:calc(var(--t) - 4px);width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:var(--jac-ink)}
 .seg input:checked+span::before{width:3px;margin-left:-1.5px;background:var(--jac-ink)}
 .seg input:focus-visible+span{outline:2px solid var(--jac-ink);outline-offset:-2px;border-radius:3px}
 .len small{display:block;margin-top:10px;color:var(--ink-2);font-size:14px}
-.fine{margin-top:30px;padding-top:18px;border-top:1px solid var(--steel);font-size:14px;color:var(--ink-2)}
+.fine{margin-top:8px;padding-top:18px;border-top:1px solid var(--steel);font-size:14px;color:var(--ink-2);max-width:70ch}
 .fine p{margin:0 0 8px}
 .group{margin-bottom:clamp(36px,4vw,56px)}
 .group-h{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding-bottom:12px;background:var(--steel-line) bottom/100% 1px no-repeat}
@@ -158,7 +162,19 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 .group-h .ko{color:var(--ink-3);font-size:15px}
 .row{display:grid;grid-template-columns:52px minmax(0,1fr) auto auto;gap:6px 20px;align-items:baseline;padding:15px 0}
 .row .no{font-size:14px;color:var(--ink-3);font-weight:500;letter-spacing:.04em}
-.row .th{display:block;width:44px;height:56px;object-fit:cover;border-radius:2px;margin-top:8px;background:var(--pearl-2)}
+.preview{margin:26px 0 0}
+.pv-frame{background:var(--lacquer);padding:8px;border-radius:6px}
+.pv-frame img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:3px;transition:opacity .35s var(--ease)}
+.preview figcaption{margin-top:10px;font-size:15px;font-weight:500}
+.preview figcaption .num{color:var(--jac-ink);margin-right:4px}
+.preview figcaption small{display:block;font-weight:400;font-size:13.5px;color:var(--ink-3);margin-top:2px}
+.see{display:inline-flex;align-items:center;gap:7px;margin-top:9px;padding:5px 12px 5px 9px;border:1px solid var(--steel);border-radius:999px;background:none;font-size:13.5px;font-weight:500;color:var(--ink);cursor:pointer;transition:border-color .2s,background .2s,color .2s}
+.see svg{width:16px;height:16px}
+.see:hover{border-color:var(--ink)}
+.see[aria-expanded="true"]{background:var(--jac-ink);border-color:var(--jac-ink);color:#fff}
+@media (min-width:901px){.row.pv .see{background:var(--jac-ink);border-color:var(--jac-ink);color:#fff}.row.pv .no{color:var(--jac-ink)}}
+.row-ph{display:none;grid-column:2 / -1;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:4px;margin-top:6px}
+@media (max-width:900px){.preview{display:none}.row-ph:not([hidden]){display:block}}
 .row .nm{font-weight:500;font-size:17.5px;line-height:1.35}
 .row .nt{display:block;font-weight:400;font-size:14.5px;color:var(--ink-2);margin-top:3px;line-height:1.5}
 .row .pr{text-align:right;white-space:nowrap;font-size:22px;font-weight:400;letter-spacing:-.01em}
@@ -194,7 +210,8 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 .when b{font-weight:500}
 .when small{grid-column:2;color:var(--ink-2);font-size:14px}
 .when input:hover+span{border-color:var(--ink)}
-.when input:checked+span{border-color:var(--jac-ink);background:#fff}
+.when input:checked+span{border-color:var(--jac-ink);background:#f1eafb;box-shadow:inset 0 0 0 1px var(--jac-ink)}
+.when input:checked+span b{color:var(--lacquer);font-weight:600}
 .when input:checked+span::before{border:5px solid var(--jac-ink)}
 .when input:focus-visible+span{outline:2px solid var(--jac-ink);outline-offset:2px}
 .record{margin:22px 0 0;padding:0;list-style:none;font-size:15px}
@@ -248,18 +265,30 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 .entry .hero-cta{margin-top:30px}
 
 /* ───────── reviews (placeholder) ───────── */
-.reviews .wrap>header{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
-.quotes{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,5vw,72px);margin-top:44px}
-.q-big blockquote{margin:0;font-weight:300;font-size:clamp(1.6rem,2.7vw,2.5rem);line-height:1.3;letter-spacing:-.02em;color:var(--lacquer)}
-.q-big cite,.q-small cite{display:block;margin-top:16px;font-style:normal;font-size:14.5px;color:var(--ink-2)}
-.q-small{border-top:1px solid var(--lacquer)}
-.q-small figure{margin:0;padding:20px 0;border-bottom:1px solid var(--pearl-3)}
-.q-small blockquote{margin:0;font-size:17px}
-.rating-ph{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;color:var(--ink-2);font-size:15px}
-.rating-ph b{font-size:2rem;font-weight:300;color:var(--lacquer);letter-spacing:-.02em}
-.chairs{margin-top:56px;border-top:1px solid var(--lacquer)}
-.chairs>div{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr) auto;gap:8px 24px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--pearl-3)}
-.chairs .role{color:var(--ink-2);font-size:15px}
+.rev-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px 48px;flex-wrap:wrap}
+.score{display:flex;align-items:center;gap:14px 20px;flex-wrap:wrap}
+.score>b{font-size:clamp(3.6rem,6vw,5.6rem);font-weight:300;line-height:.9;letter-spacing:-.04em;color:var(--on-dark)}
+.score>div{display:grid;gap:8px;color:var(--on-dark-2);font-size:15px}
+.stars{display:inline-flex;gap:4px;color:var(--on-dark)}
+.stars svg{width:17px;height:17px}
+.rev-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,4vw,56px);margin-top:clamp(40px,5vw,64px)}
+.rev-feature{margin:0;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);background:var(--lacquer-2);border-radius:6px;overflow:hidden;box-shadow:0 30px 60px -30px rgba(0,0,0,.55)}
+.rev-ph{width:100%;height:100%;min-height:380px;object-fit:cover}
+.rev-body{padding:clamp(24px,3vw,44px);display:flex;flex-direction:column;justify-content:center;gap:16px}
+.rev-no{font-size:15px;color:var(--on-dark-2)}
+.rev-no .num{color:var(--on-dark);font-weight:500;margin-right:10px;letter-spacing:.04em}
+.rev-feature blockquote{margin:0;font-weight:300;font-size:clamp(1.35rem,1.75vw,1.65rem);line-height:1.3;letter-spacing:-.015em;color:var(--on-dark)}
+.rev-feature figcaption,.rev-list figcaption{font-size:14.5px;color:var(--on-dark-2)}
+.rev-feature figcaption small{display:block;margin-top:8px;font-size:13px;color:var(--on-dark-2)}
+.rev-list{display:flex;flex-direction:column;border-top:1px solid #4b3053}
+.rev-list figure{margin:0;padding:24px 0;border-bottom:1px solid #4b3053;display:grid;gap:12px}
+.rev-list blockquote{margin:0;font-size:18px;line-height:1.5;color:var(--on-dark)}
+.rev-more{display:inline-flex;align-items:center;gap:8px;margin-top:22px;color:var(--on-dark);font-weight:500;text-decoration-color:#7a6684}
+.rev-more:hover{text-decoration-color:currentColor}
+.rev-more svg{width:16px;height:16px}
+.chairs{margin-top:clamp(48px,6vw,72px);border-top:1px solid #6a5372}
+.chairs>div{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,5fr) auto;gap:8px 24px;align-items:baseline;padding:16px 0;border-bottom:1px solid #4b3053}
+.chairs .role{color:var(--on-dark-2);font-size:15px}
 
 /* ───────── visit ───────── */
 .visit .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,96px)}
@@ -285,7 +314,7 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 
 /* ───────── close + footer ───────── */
 .close{padding:clamp(80px,10vw,150px) 0 0;overflow:hidden}
-.close .wings{color:var(--lacquer-3);width:min(1100px,100%);margin:0 auto clamp(40px,5vw,72px)}
+.close .wings{color:var(--on-dark-2);width:min(780px,100%);margin:0 auto clamp(40px,5vw,72px)}
 .close h2{font-size:clamp(2.4rem,5.6vw,5.6rem);text-align:center;margin-inline:auto;max-width:14ch}
 .close .sub{text-align:center;margin-inline:auto}
 .close .hero-cta{justify-content:center}
@@ -317,7 +346,7 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 }
 @media (max-width:900px){
   :root{--head:64px}
-  .hero .wrap,.prices .wrap,.booking .wrap,.owner .wrap,.entry .wrap,.visit .wrap,.quotes{grid-template-columns:minmax(0,1fr)}
+  .hero .wrap,.prices .wrap,.booking .wrap,.owner .wrap,.entry .wrap,.visit .wrap,.rev-grid{grid-template-columns:minmax(0,1fr)}
   .hero-copy{padding:0}
   .book{min-height:0;grid-template-columns:minmax(0,1fr);padding:8px}
   .tabs{flex-direction:row;padding:8px 0 0;gap:4px}
@@ -331,6 +360,7 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
   .readout{order:5}.hero-cta{order:6}
   .plate{aspect-ratio:16/10}
   .prices-side{position:static}
+  .side-sticky{position:static}
   .owner figure{order:2}
   .status .lbl-long{display:none}
 }
@@ -348,6 +378,8 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
   .qual{grid-template-columns:minmax(0,1fr)}
   .contacts>div{grid-template-columns:minmax(0,1fr)}
   .chairs>div{grid-template-columns:minmax(0,1fr)}
+  .rev-feature{grid-template-columns:minmax(0,1fr)}
+  .rev-ph{min-height:0;aspect-ratio:4/3}
   .map{aspect-ratio:4/3}
   .hero-cta .btn{flex:1 1 auto}
   .plate{aspect-ratio:4/3}
@@ -372,6 +404,8 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
   <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="M6.6 3.5h2.6l1.4 4.1-2 1.4a12 12 0 0 0 6.4 6.4l1.4-2 4.1 1.4v2.6a2 2 0 0 1-2.1 2C10.2 18.9 5.1 13.8 4.6 5.6a2 2 0 0 1 2-2.1Z"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M4 12h15m-6-6 6 6-6 6"/></symbol>
   <symbol id="i-out" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7m-8 0h8v8"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2.8 2.75 5.9 6.45.75-4.78 4.4 1.3 6.37L12 17.02 6.28 20.22l1.3-6.37L2.8 9.45l6.45-.75Z"/></symbol>
+  <symbol id="i-photo" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="9" cy="10" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="m4 17 5-4.5 3.5 3 3-2.5 4.5 4"/></symbol>
   <symbol id="i-down" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6"/></symbol>
   <symbol id="i-ig" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></symbol>
   <symbol id="i-fb" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" d="M14 21v-7.5h2.6l.4-3H14V8.7c0-.9.3-1.5 1.6-1.5H17V4.6c-.3 0-1.2-.1-2.3-.1-2.3 0-3.7 1.4-3.7 3.9v2.1H8.5v3H11V21"/></symbol>
@@ -433,18 +467,26 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
     <div class="prices-side">
       <h2 id="prices-h">The style book, <b>priced by your length.</b></h2>
       <p class="sub">Every price below is from Ido Hair’s own booking menu. Pick your hair length and the list re-prices itself.</p>
+      <div class="side-sticky">
       <fieldset class="len">
         <legend>Your hair length</legend>
         <div class="seg" id="len-prices" role="radiogroup" aria-label="Hair length"></div>
         <small>VS very short, S short, M medium, L long, VL very long, XVL extra long. Not sure? The consultation is free.</small>
       </fieldset>
+      <figure class="preview" aria-live="polite">
+        <div class="pv-frame"><img id="pv-img" src="https://images.unsplash.com/photo-1599407365109-d62ea7d81a42?auto=format&amp;fit=crop&amp;w=800&amp;q=72" alt="Long black hair in loose, defined waves, seen in profile" width="800" height="450" loading="lazy" style="object-position:35% 38%"></div>
+        <figcaption><span class="num" id="pv-no">No.01</span> <span id="pv-name">Digital, setting &amp; C-curl perm</span><small>Hover a style with a photo icon to see it here.</small></figcaption>
+      </figure>
+      </div>
+    </div>
+    <div>
+      <div id="menu"></div>
       <div class="fine">
         <p>All prices are subject to change upon consultation.</p>
         <p>Very frizzy or thick hair: +$55 to $155 on perms and straightening, +$15 to $25 on colour. Two-tone colour +$35.</p>
         <p>Perms and Shiseido straightening include a free haircut.</p>
       </div>
     </div>
-    <div id="menu"></div>
   </div>
 </section>
 
@@ -556,20 +598,30 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 </section>
 
 <!-- REVIEWS (placeholder) -->
-<section class="sec reviews" aria-labelledby="rev-h" style="padding-top:0">
+<section class="sec reviews dark" aria-labelledby="rev-h">
   <div class="wrap">
-    <header>
+    <div class="rev-head">
       <h2 id="rev-h">What clients <b>say.</b></h2>
-      <div class="rating-ph"><b class="num">4.7</b><span>on Google, 2,033 reviews</span><span class="tag-ph">Placeholder: verify</span></div>
-    </header>
-    <div class="quotes">
-      <figure class="q-big">
-        <blockquote>“Placeholder review. Replace with a real Google review that talks about a digital perm or Shiseido result, ideally naming the stylist.”</blockquote>
-        <cite>Client name, Google review <span class="tag-ph">Placeholder</span></cite>
+      <div class="score">
+        <b class="num">4.7</b>
+        <div><span class="stars" role="img" aria-label="5 out of 5 stars"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span><span>2,033 Google reviews</span></div>
+        <span class="tag-ph">Placeholder: verify</span>
+      </div>
+    </div>
+    <div class="rev-grid">
+      <figure class="rev-feature">
+        <img class="rev-ph" src="https://images.unsplash.com/photo-1599407365109-d62ea7d81a42?auto=format&amp;fit=crop&amp;w=800&amp;q=72" alt="Long black hair in loose, defined waves, the No.01 digital perm style" width="800" height="1000" loading="lazy" style="object-position:35% 38%">
+        <div class="rev-body">
+          <span class="rev-no"><span class="num">No.01</span>Digital perm</span>
+          <span class="stars" role="img" aria-label="5 out of 5 stars"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span>
+          <blockquote>“I had a digital perm done and couldn’t be happier. The team was professional, attentive, and really took time to understand the look I wanted.”</blockquote>
+          <figcaption>Yana S., Google review <span class="tag-ph">Placeholder: verify</span><small>Photo shows the style, not the reviewer.</small></figcaption>
+        </div>
       </figure>
-      <div class="q-small">
-        <figure><blockquote>“Placeholder review about how easy it was to book or walk in on George St.”</blockquote><cite>Client name, Google review <span class="tag-ph">Placeholder</span></cite></figure>
-        <figure><blockquote>“Placeholder review about the consultation and being listened to.”</blockquote><cite>Client name, Google review <span class="tag-ph">Placeholder</span></cite></figure>
+      <div class="rev-list">
+        <figure><span class="stars" role="img" aria-label="5 out of 5 stars"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span><blockquote>“I am so impressed with how it turned out! My hairdresser Yein was very welcoming and friendly. She listened well to what I wanted to achieve.”</blockquote><figcaption>Rina, Google review <span class="tag-ph">Placeholder: verify</span></figcaption></figure>
+        <figure><span class="stars" role="img" aria-label="5 out of 5 stars"><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg><svg aria-hidden="true"><use href="#i-star"/></svg></span><blockquote>“Easy to find, convenient location. I booked the day before and they were incredibly accommodating in fitting me in last minute.”</blockquote><figcaption>Manna L., Google review <span class="tag-ph">Placeholder: verify</span></figcaption></figure>
+        <a class="rev-more" href="https://www.google.com/maps/search/?api=1&amp;query=Ido+Hair+Brisbane+187+George+St+Brisbane+City+QLD+4000" target="_blank" rel="noopener">Read every review on Google <svg aria-hidden="true"><use href="#i-out"/></svg></a>
       </div>
     </div>
     <div class="chairs" aria-label="Team (placeholder)">
@@ -581,7 +633,7 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 </section>
 
 <!-- VISIT -->
-<section class="sec visit" id="visit" aria-labelledby="visit-h" style="padding-top:clamp(56px,6vw,96px);border-top:1px solid var(--pearl-3)">
+<section class="sec visit" id="visit" aria-labelledby="visit-h" >
   <div class="wrap">
     <div>
       <h2 id="visit-h">Level 2, <b>187 George Street.</b></h2>
@@ -770,7 +822,7 @@ let tier=null;
 function buildSeg(host,name){
   TIERS.forEach(t=>{
     const l=document.createElement("label");
-    l.innerHTML=`<input type="radio" name="${name}" value="${t}"><span>${t}</span>`;
+    l.innerHTML=`<input type="radio" name="${name}" value="${t}"><span><em>${t}</em></span>`;
     l.querySelector("input").addEventListener("change",()=>setTier(t));
     host.appendChild(l);
   });
@@ -784,15 +836,30 @@ function setTier(t){
 
 /* ───── price book ───── */
 const menu=$("#menu");
+let pvNo="01";const openPh=new Set();const wide=matchMedia("(min-width:901px)");
+function setPreview(no){
+  if(no===pvNo)return;const pl=PLATES.find(x=>x.no===no);if(!pl)return;pvNo=no;
+  const im=$("#pv-img");im.style.opacity="0";
+  setTimeout(()=>{im.src=U(pl.img,800);im.alt=pl.alt;im.style.objectPosition=pl.pos;im.style.opacity="1";},reduce?0:180);
+  $("#pv-no").textContent="No."+no;$("#pv-name").textContent=byNo[no].n;
+  menu.querySelectorAll(".row[data-ph]").forEach(r=>r.classList.toggle("pv",r.dataset.ph===no));
+}
+const hoverPv=e=>{if(!wide.matches)return;const r=e.target.closest(".row[data-ph]");if(r)setPreview(r.dataset.ph);};
+menu.addEventListener("mouseover",hoverPv);menu.addEventListener("focusin",hoverPv);
+menu.addEventListener("click",e=>{const b=e.target.closest(".see");if(!b)return;const no=b.dataset.see;
+  if(wide.matches){setPreview(no);return;}
+  const row=b.closest(".row"),ph=row.querySelector(".row-ph"),open=ph.hidden;
+  ph.hidden=!open;b.setAttribute("aria-expanded",String(open));b.lastChild.textContent=open?"Hide the style photo":"See the style photo";open?openPh.add(no):openPh.delete(no);});
 function renderMenu(){
   menu.innerHTML=MENU.map(g=>`
   <div class="group"><div class="group-h"><h3>${g.g}</h3><span class="ko" lang="ko">${g.ko}</span></div>
   ${g.items.map(it=>{const pr=priceFor(it,tier);
     const price=pr.ask?`<span class="ask">At booking</span>`:`${pr.from?"<small>from</small>":""}${money(pr.v)}`;
-    const pl=PLATES.find(x=>x.no===it.no);
-    return `<div class="row${pr.tier?" lit":""}"><span class="no num">${it.no}${pl?`<img class="th" src="${U(pl.img,160)}" alt="" loading="lazy" width="44" height="56" style="object-position:${pl.pos}">`:""}</span>
-    <span class="nm">${it.n}${it.t?`<span class="nt">${it.t}${rangeText(it)&&!pr.tier?` ${rangeText(it)}.`:""}</span>`:(rangeText(it)?`<span class="nt">${rangeText(it)}</span>`:"")}</span>
-    <span class="pr num">${price}</span><button class="pick" type="button" data-no="${it.no}" aria-label="Book No.${it.no} ${it.n}">Book</button></div>`}).join("")}
+    const pl=PLATES.find(x=>x.no===it.no);const open=openPh.has(it.no);
+    const see=pl?`<button class="see" type="button" data-see="${it.no}" aria-expanded="${open}"><svg aria-hidden="true"><use href="#i-photo"/></svg>${open?"Hide":"See"} the style photo</button>`:"";
+    return `<div class="row${pr.tier?" lit":""}${pl&&pvNo===it.no?" pv":""}"${pl?` data-ph="${it.no}"`:""}><span class="no num">${it.no}</span>
+    <span class="nm">${it.n}${it.t?`<span class="nt">${it.t}${rangeText(it)&&!pr.tier?` ${rangeText(it)}.`:""}</span>`:(rangeText(it)?`<span class="nt">${rangeText(it)}</span>`:"")}${see}</span>
+    <span class="pr num">${price}</span><button class="pick" type="button" data-no="${it.no}" aria-label="Book No.${it.no} ${it.n}">Book</button>${pl?`<img class="row-ph" ${open?"":"hidden"} src="${U(pl.img,800)}" alt="${pl.alt}" loading="lazy" style="object-position:${pl.pos}">`:""}</div>`}).join("")}
   </div>`).join("");
 }
 menu.addEventListener("click",e=>{const b=e.target.closest(".pick");if(!b)return;setStyle(b.dataset.no);$("#book").scrollIntoView({behavior:reduce?"auto":"smooth"});setTimeout(()=>$("#f-style").focus({preventScroll:true}),reduce?0:600);});
