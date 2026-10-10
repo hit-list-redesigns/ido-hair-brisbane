@@ -394,9 +394,14 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
 /* ───────── mobile layer ───────── */
 .menu-btn{display:none;place-items:center;width:44px;height:44px;flex:none;border:1px solid var(--steel);border-radius:999px;background:none;color:var(--ink);cursor:pointer}
 .menu-btn svg{width:20px;height:20px}
-.mnav{border-top:1px solid var(--pearl-3);background:var(--pearl);max-height:calc(100svh - var(--head));overflow:auto;overscroll-behavior:contain}
+.mnav{position:absolute;left:0;right:0;top:100%;display:flex;flex-direction:column;height:calc(100svh - var(--head));overflow:auto;overscroll-behavior:contain;background:rgba(29,17,33,.58);opacity:0;transition:opacity .35s var(--ease)}
 .mnav[hidden]{display:none}
-.mnav-in{max-width:var(--max);margin:0 auto;padding:4px var(--gut) 24px}
+.mnav.open{opacity:1}
+.mnav-in{background:var(--pearl);border-top:1px solid var(--pearl-3);border-radius:0 0 14px 14px;box-shadow:0 30px 60px -20px rgba(20,8,24,.6);padding:4px var(--gut) 24px;transform:translateY(-14px);transition:transform .45s var(--ease)}
+.mnav.open .mnav-in{transform:none}
+.mnav-scrim{display:block;flex:1 0 96px;width:100%;border:0;background:none;cursor:pointer}
+html.menu-lock body{overflow:hidden}
+html.menu-lock .mbar{visibility:hidden}
 .mnav .ml{display:flex;justify-content:space-between;align-items:center;min-height:58px;border-bottom:1px solid var(--pearl-3);font-size:21px;font-weight:300;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
 .mnav .ml svg{width:18px;height:18px;color:var(--ink-3)}
 .mnav-foot{display:grid;gap:12px;margin-top:20px}
@@ -488,6 +493,7 @@ h3{font-weight:500;font-size:1.2rem;letter-spacing:-.005em;margin:0;line-height:
         <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&amp;query=Ido+Hair+Brisbane+187+George+St+Brisbane+City+QLD+4000" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg>Directions</a>
       </div>
     </div>
+    <button class="mnav-scrim" type="button" tabindex="-1" aria-label="Close menu"></button>
   </nav>
 </header>
 
@@ -997,11 +1003,16 @@ const seen=new Map();
 const io=new IntersectionObserver(es=>{es.forEach(e=>seen.set(e.target,e.isIntersecting));bar.classList.toggle("show",![...seen.values()].some(Boolean));},{threshold:0});
 io.observe($("#hero-book"));io.observe($("#card"));
 const mb=$("#menu-btn"),mn=$("#mnav");
-function setMenu(open){mn.hidden=!open;mb.setAttribute("aria-expanded",String(open));mb.setAttribute("aria-label",open?"Close menu":"Open menu");mb.querySelector("use").setAttribute("href",open?"#i-x":"#i-menu");top.classList.toggle("menu-open",open);
+let menuT;
+function setMenu(open){clearTimeout(menuT);
+  if(open){mn.hidden=false;requestAnimationFrame(()=>requestAnimationFrame(()=>mn.classList.add("open")));}
+  else{mn.classList.remove("open");menuT=setTimeout(()=>{mn.hidden=true;},reduce?0:350);}
+  document.documentElement.classList.toggle("menu-lock",open);$("#main").inert=open;bar.inert=open;
+  if(open)setTimeout(()=>mn.querySelector(".ml").focus({preventScroll:true}),60);mb.setAttribute("aria-expanded",String(open));mb.setAttribute("aria-label",open?"Close menu":"Open menu");mb.querySelector("use").setAttribute("href",open?"#i-x":"#i-menu");top.classList.toggle("menu-open",open);
   if(open){const s=$("#status"),m=$("#m-status");m.classList.toggle("open",s.classList.contains("open"));m.querySelector("span").textContent=$("#status-text").textContent;}}
-mb.addEventListener("click",()=>setMenu(mn.hidden));
-mn.addEventListener("click",e=>{if(e.target.closest("a"))setMenu(false);});
-addEventListener("keydown",e=>{if(e.key==="Escape"&&!mn.hidden){setMenu(false);mb.focus();}});
+mb.addEventListener("click",()=>setMenu(mb.getAttribute("aria-expanded")!=="true"));
+mn.addEventListener("click",e=>{if(e.target.closest("a")||e.target.closest(".mnav-scrim"))setMenu(false);});
+addEventListener("keydown",e=>{if(e.key==="Escape"&&mb.getAttribute("aria-expanded")==="true"){setMenu(false);mb.focus();}});
 matchMedia("(min-width:1101px)").addEventListener("change",e=>{if(e.matches)setMenu(false);});
 const sent=document.createElement("div");sent.style.cssText="position:absolute;top:0;left:0;height:8px;width:1px;pointer-events:none";document.body.prepend(sent);
 new IntersectionObserver(([e])=>top.classList.toggle("scrolled",!e.isIntersecting)).observe(sent);
